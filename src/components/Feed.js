@@ -8,6 +8,10 @@ function Feed() {
       
       <QuoraBox/>
       <Post/>
+      <Post/>
+      <Post/>
+      <Post/>
+
     </div>
   )
 }
