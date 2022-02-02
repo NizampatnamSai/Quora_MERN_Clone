@@ -1,8 +1,22 @@
 import { Avatar } from '@material-ui/core'
 import { ArrowDownward, ArrowDownwardOutlined, ArrowUpwardOutlined, ChatBubbleOutlined, MoreHorizOutlined, RepeatOneOutlined, ShareOutlined } from '@material-ui/icons'
-import React from 'react'
+import React, { useState } from 'react'
+
 import './css/Post.css'
+
+import 'react-responsive-modal/styles.css'
+import {Modal} from 'react-responsive-modal'
+import CloseIcon  from '@material-ui/icons/Close'
+import ReactQuill from 'react-quill'
+import 'react-quill/dist/quill.snow.css'
+
+  const ModalClose=(
+    <CloseIcon/>)
+
 function Post() {
+
+const [isModalopen, setModalopen]=useState(false)
+
   return (
     <div className='post'>
       <div className='post__info'>
@@ -18,7 +32,34 @@ function Post() {
             This is test question
         </p>
 
-        <button className='post__btnAnswer'>Answer</button>
+        <button  onClick={()=>setModalopen(true)} className='post__btnAnswer'>Answer</button>
+     
+        <Modal
+        open={isModalopen}
+        closeIcon={ModalClose}
+        onClose={()=>setModalopen(false)}
+        closeOnEsc
+        center
+        closeOnOverlayClick={false}
+
+        styles={{
+          overlay:{
+            height:'auto',
+          }
+        }}>
+           <div className='modal__question'>
+               <h1>This is text question</h1>
+               <p>Asked by {"  "} <span className='name'>Username</span> on <span className='name'>Timestamp</span>  </p>
+           </div>
+           <div className='modal__answer'>
+               <ReactQuill placeholder='Enter your answer'/>
+           </div>
+           <div className='modal__button'>
+           <button className='cancle' onClick={()=>setModalopen(false)}>Cancle</button>
+      <button className='add' type='submit' >Add question</button>
+
+           </div>
+        </Modal>
       </div>
       </div>
 
